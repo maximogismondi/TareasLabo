@@ -44,10 +44,17 @@ public class Fecha {
 
         while (!ya_esta_sumada){
             boolean anio_biciesto = false;
+            
             if(this.anio % 4 == 0){
                 anio_biciesto = true;
             }
-            if (this.mes == 2 && !anio_biciesto && this.dia>28) {
+
+            if (this.mes > 12){
+                this.anio ++;
+                this.mes = this.mes - 11;
+            }
+
+            else if (this.mes == 2 && !anio_biciesto && this.dia>28) {
                 this.mes ++;
                 this.dia = this.dia - 27;
             }
@@ -63,10 +70,7 @@ public class Fecha {
                 this.mes ++;
                 this.dia = this.dia - 30;
             }
-            else if (this.mes > 12){
-                this.anio ++;
-                this.mes = this.mes - 11;
-            }
+            
             else{
                 ya_esta_sumada = true;
             }
