@@ -49,7 +49,7 @@ public class Madre extends Persona {
     public HashSet<Hijo> hijos_menores(){
         HashSet<Hijo> hijos_menores = new HashSet<>();
         for(Hijo hijo : this.getHijos()){
-            if(hijo.getEdad() >= 18){
+            if(hijo.getEdad() <= 18){
                 hijos_menores.add(hijo);
             }
         }
