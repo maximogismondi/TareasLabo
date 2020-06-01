@@ -1,3 +1,5 @@
+package com.company;
+
 public class Estudiante extends Persona{
 
     private String curso;

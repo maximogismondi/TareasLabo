@@ -1,3 +1,5 @@
+package com.company;
+
 public class Persona {
 
     private String nombre;
@@ -19,7 +21,6 @@ public class Persona {
         this.edad = edad;
         this.dni = 12345678;
     }
-
 
     public Persona(String nombre){
         this.nombre = nombre;
