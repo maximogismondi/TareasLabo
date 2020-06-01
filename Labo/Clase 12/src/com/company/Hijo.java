@@ -6,11 +6,13 @@ public class Hijo extends Persona{
     private String juego_favorito;
 
     public Hijo() {
+        super();
         this.escuela = "Politecnico Modelo";
         this.juego_favorito = "The Binding Of Isaac";
     }
 
-    public Hijo(String escuela, String juego_favorito) {
+    public Hijo(String escuela, String juego_favorito, String nombre, int edad, int dni) {
+        super(nombre,edad,dni);
         this.escuela = escuela;
         this.juego_favorito = juego_favorito;
     }

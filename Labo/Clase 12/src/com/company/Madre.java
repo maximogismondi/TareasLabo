@@ -7,12 +7,14 @@ public class Madre extends Persona {
     private String nombre_empresa;
     private HashSet<Hijo> hijos;
 
-    public Madre(String nombre_empresa) {
+    public Madre(String nombre_empresa, String nombre, int edad, int dni) {
+        super(nombre,edad,dni);
         this.nombre_empresa = nombre_empresa;
         this.hijos = new HashSet<Hijo>();
     }
 
     public Madre() {
+        super();
         this.nombre_empresa = "McDonald's";
         this.hijos = new HashSet<Hijo>();
     }
