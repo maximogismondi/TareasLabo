@@ -14,4 +14,20 @@ public class Hijo extends Persona{
         this.escuela = escuela;
         this.juego_favorito = juego_favorito;
     }
+
+    public String getEscuela() {
+        return escuela;
+    }
+
+    public void setEscuela(String escuela) {
+        this.escuela = escuela;
+    }
+
+    public String getJuego_favorito() {
+        return juego_favorito;
+    }
+
+    public void setJuego_favorito(String juego_favorito) {
+        this.juego_favorito = juego_favorito;
+    }
 }

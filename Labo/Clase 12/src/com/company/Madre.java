@@ -2,7 +2,7 @@ package com.company;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Madre extends Persona{
+public class Madre extends Persona {
 
     private String nombre_empresa;
     private HashSet<Hijo> hijos;
@@ -26,5 +26,31 @@ public class Madre extends Persona{
 
     public int hashCode() {
         return Objects.hash(hijos);
+    }
+
+    public String getNombre_empresa() {
+        return nombre_empresa;
+    }
+
+    public void setNombre_empresa(String nombre_empresa) {
+        this.nombre_empresa = nombre_empresa;
+    }
+
+    public HashSet<Hijo> getHijos() {
+        return hijos;
+    }
+
+    public void setHijos(HashSet<Hijo> hijos) {
+        this.hijos = hijos;
+    }
+
+    public HashSet<Hijo> hijos_menores(){
+        HashSet<Hijo> hijos_menores = new HashSet<>();
+        for(Hijo hijo : this.getHijos()){
+            if(hijo.getEdad() >= 18){
+                hijos_menores.add(hijo);
+            }
+        }
+        return hijos_menores;
     }
 }
