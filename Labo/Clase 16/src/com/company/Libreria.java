@@ -1,71 +1,101 @@
 package com.company;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.HashMap;
 
 public class Libreria {
 
-    private HashMap<StringEditoriales, Integer> editoriales;
+    private HashSet<Editorial> editoriales;
 
     public Libreria(){
-        this.editoriales = new HashMap<StringEditoriales, Integer>();
-        this.editoriales.put(StringEditoriales.Alianza,0);
-        this.editoriales.put(StringEditoriales.Atlántida,0);
-        this.editoriales.put(StringEditoriales.ElAteneo,0);
-        this.editoriales.put(StringEditoriales.Interzona,0);
-        this.editoriales.put(StringEditoriales.Kapelusz,0);
-        this.editoriales.put(StringEditoriales.Sudamericana,0);
-        this.editoriales.put(StringEditoriales.Sur,0);
+        this.editoriales = new HashSet<>();
+        this.editoriales.add(Editorial.Alianza);
+        this.editoriales.add(Editorial.Atlántida);
+        this.editoriales.add(Editorial.ElAteneo);
+        this.editoriales.add(Editorial.Interzona);
+        this.editoriales.add(Editorial.Kapelusz);
+        this.editoriales.add(Editorial.Sudamericana);
+        this.editoriales.add(Editorial.Sur);
     }
 
-    public void agregarVenta(String editorial){
-        switch (editorial){
+    private Editorial switchEditoriales(String nombre_editorial){
+        Editorial editorial = null;
+        switch (nombre_editorial){
             case "Kapelusz":
-                this.editoriales.replace(StringEditoriales.Kapelusz, (this.editoriales.get(editorial)+1));
+                return editorial.Kapelusz;
             case "Sudamericana":
-                this.editoriales.replace(StringEditoriales.Sudamericana, (this.editoriales.get(editorial)+1));
+                return editorial.Sudamericana;
             case "Atlántida":
-                this.editoriales.replace(StringEditoriales.Atlántida, (this.editoriales.get(editorial)+1));
+                return editorial.Atlántida;
             case "ElAteneo":
-                this.editoriales.replace(StringEditoriales.ElAteneo, (this.editoriales.get(editorial)+1));
+                return editorial.ElAteneo;
             case "Interzona":
-                this.editoriales.replace(StringEditoriales.Interzona, (this.editoriales.get(editorial)+1));
+                return editorial.Interzona;
             case "Sur":
-                this.editoriales.replace(StringEditoriales.Sur, (this.editoriales.get(editorial)+1));
+                return editorial.Sur;
             case "Alianza":
-                this.editoriales.replace(StringEditoriales.Alianza, (this.editoriales.get(editorial)+1));
+                return editorial.Alianza;
+            default:
+                return editorial;
         }
     }
 
-    public void eliminarVenta(String editorial){
-        if (this.editoriales.get(editorial) > 0) {
-            this.editoriales.replace(editorial, this.editoriales.get(editorial) - 1);
+    private String switchEditorialesInverso(Editorial editorial){
+        switch (editorial){
+            case Kapelusz:
+                return "Kapelusz";
+            case Sudamericana:
+                return "Sudamericana";
+            case Atlántida:
+                return "Atlántida";
+            case ElAteneo:
+                return "ElAteneo";
+            case Interzona:
+                return "Interzona";
+            case Sur:
+                return "Sur";
+            case Alianza:
+                return "Alianza";
+            default:
+                return "No se ha encontrado";
         }
-        else{
-            System.out.println("Hay 0 libros vendidos, no se puede elimiar otro");
-        }
+    }
+
+    public void agregarVenta(String editorial, int cantidad){
+
+        Editorial editorial_incrementar = switchEditoriales(editorial);
+        editorial_incrementar.incrementarVentas(cantidad);
+
     }
 
     public int cantidadVendidaEditorial(String editorial){
-        return this.editoriales.get(editorial);
+        Editorial editorial_buscar = switchEditoriales(editorial);
+        return editorial_buscar.getCant_ventas();
+    }
+
+    public void eliminarVenta(String editorial, int cantidad){
+        Editorial editorial_decrementar = switchEditoriales(editorial);
+        if(cantidadVendidaEditorial(editorial) >= cantidad){
+            editorial_decrementar.incrementarVentas(-1*cantidad);
+        }
+        else {
+            System.out.println("Da negatvo");
+        }
     }
 
     public String editorialConMasVentas(){
-        String editorialConMasVentas = "";
-        for (HashMap.Entry<String, Integer> editorial : editoriales.entrySet()){
-            editorialConMasVentas = editorial.getKey();
-        }
-        for (HashMap.Entry<String, Integer> editorial : editoriales.entrySet()){
-            if (editorial.getValue() > editoriales.get(editorialConMasVentas)){
-                editorialConMasVentas = editorial.getKey();
+        String editorial_con_mas_ventas = "Sur";
+        int cantidad = -1;
+        for (Editorial editorial : editoriales){
+            if (editorial.getCant_ventas() > cantidadVendidaEditorial(editorial_con_mas_ventas)){
+                editorial_con_mas_ventas = switchEditorialesInverso(editorial);
             }
         }
-        return editorialConMasVentas;
+        return editorial_con_mas_ventas;
     }
 
     public void imprimirTodo(){
-        for (HashMap.Entry<String, Integer> editorial : this.getEditoriales().entrySet()){
-            System.out.println("Editorial: " + editorial.getKey() +  " Ventas: " + editorial.getValue());
+        for (Editorial editorial : editoriales){
+            System.out.println("Editorial: " + switchEditorialesInverso(editorial) +  " Ventas: " + editorial.getCant_ventas());
         }
     }
 }
