@@ -4,10 +4,10 @@ public class Persona {
 
     private String nombre;
     private String apellido;
-    private String edad;
+    private Integer edad;
     private String ocupacion;
 
-    public Persona(String nombre, String apellido, String edad, String ocupacion) {
+    public Persona(String nombre, String apellido, Integer edad, String ocupacion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
@@ -30,11 +30,11 @@ public class Persona {
         this.apellido = apellido;
     }
 
-    public String getEdad() {
+    public Integer getEdad() {
         return edad;
     }
 
-    public void setEdad(String edad) {
+    public void setEdad(Integer edad) {
         this.edad = edad;
     }
 

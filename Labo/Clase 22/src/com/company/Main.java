@@ -14,7 +14,6 @@ public class Main {
         JFrame ventana = new JFrame();
         ventana.setLayout(null);
         ventana.setSize(500,475);
-        ventana.setVisible(true);
 
         JLabel texto_nombre = new JLabel("Nombre");
         texto_nombre.setSize(100,50);
@@ -60,10 +59,10 @@ public class Main {
         guardar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (!campo_nombre.getText().equals("") && !campo_apellido.getText().equals("") && !campo_edad.getText().equals("") && !campo_ocupacion.getText().equals("")){
+                if (!campo_nombre.getText().equals("") && !campo_apellido.getText().equals("") && !campo_edad.getText().equals("") && !campo_ocupacion.getText().equals("")) {
                     String nombre = campo_nombre.getText();
                     String apellido = campo_apellido.getText();
-                    String edad = campo_edad.getText();
+                    Integer edad = Integer.parseInt(campo_edad.getText());
                     String ocupacion = campo_ocupacion.getText();
                     personas.add(new Persona(nombre, apellido, edad, ocupacion));
                     mensaje.setText("Se ha agregado correctamente");
@@ -87,5 +86,6 @@ public class Main {
         ventana.add(campo_ocupacion);
         ventana.add(guardar);
         ventana.add(mensaje);
+        ventana.setVisible(true);
     }
 }
