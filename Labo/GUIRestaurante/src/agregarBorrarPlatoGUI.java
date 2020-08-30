@@ -1,3 +1,7 @@
+package com.company.RestauranteGUI;
+
+import com.company.Restaurante.Pedido;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -95,14 +99,17 @@ public class agregarBorrarPlatoGUI{
         subPlato.addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e) {
-                if(chequearPlato(platosBox.getItemAt(platosBox.getSelectedIndex()), restaurante)){
-                    restaurante.actualizarMenu(null, platosBox.getItemAt(platosBox.getSelectedIndex()), "sub");
-                    addItemsPlatos(platosBox, restaurante);
-                    restaurante.resetMenu2(restaurante);
+                if(! platosBox.getItemAt(platosBox.getSelectedIndex()).equals("                     ___")){
+                    if(chequearPlato(platosBox.getItemAt(platosBox.getSelectedIndex()), restaurante)){
+                        restaurante.actualizarMenu(null, platosBox.getItemAt(platosBox.getSelectedIndex()), "sub");
+                        addItemsPlatos(platosBox, restaurante);
+                        restaurante.resetMenu2(restaurante);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(contenedor,"El plato esta en un pedido Activo","Alert",JOptionPane.WARNING_MESSAGE);
+                    }
                 }
-                else{
-                    JOptionPane.showMessageDialog(contenedor,"El plato esta en un pedido Activo","Alert",JOptionPane.WARNING_MESSAGE);
-                }
+
             }
         } );
 

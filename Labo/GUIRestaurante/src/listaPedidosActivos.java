@@ -1,3 +1,7 @@
+package com.company.RestauranteGUI;
+
+import com.company.Restaurante.Pedido;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -90,9 +94,6 @@ public class listaPedidosActivos {
                             Pedido pedido_aux = restaurante.getListaPedidos().get(indice);
                             restaurante.getListaPedidos().remove(pedido_aux);
                             restaurante.getListaPedidos().add(pedido_aux);
-                        }
-                        else if(estadoBox.getItemAt(estadoBox.getSelectedIndex()).equals("Finalizado")){
-                            restaurante.actualizarListaPedido(pedido_aux);
                         }
 
                         JOptionPane.showMessageDialog(contenedor,"El pedido se a actualizado a: "+ estadoBox.getItemAt(estadoBox.getSelectedIndex()));

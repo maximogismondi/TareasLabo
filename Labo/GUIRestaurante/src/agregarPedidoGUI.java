@@ -1,3 +1,7 @@
+package com.company.RestauranteGUI;
+
+import com.company.Restaurante.Pedido;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -55,17 +59,17 @@ public class agregarPedidoGUI{
                           platos.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
         addItemsPlatos(platos, restaurante);
 
-        ImageIcon addPlatoIMG = new ImageIcon("C:/Users/maxim/Desktop/Cole casa/Labo/TareasLabo/Labo/GUIRestaurante/src/addBoton.png");
+        ImageIcon addPlatoIMG = new ImageIcon("C:/Users/Franco/Desktop/COLEGIO/Laboratorio/Ejercicios de Java/src/com/company/RestauranteGUI/addBoton.png");
         JButton addPlato  = new JButton();
                 addPlato.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
                 addPlato.setIcon(addPlatoIMG);
 
-        ImageIcon subPlatoIMG = new ImageIcon("C:/Users/maxim/Desktop/Cole casa/Labo/TareasLabo/Labo/GUIRestaurante/src/subBoton.png");
+        ImageIcon subPlatoIMG = new ImageIcon("C:/Users/Franco/Desktop/COLEGIO/Laboratorio/Ejercicios de Java/src/com/company/RestauranteGUI/subBoton.png");
         JButton subPlato  = new JButton();
                 subPlato.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
                 subPlato.setIcon(subPlatoIMG);
 
-        ImageIcon addPedidoIMG = new ImageIcon("C:/Users/maxim/Desktop/Cole casa/Labo/TareasLabo/Labo/GUIRestaurante/src/addPedido.png");
+        ImageIcon addPedidoIMG = new ImageIcon("C:/Users/Franco/Desktop/COLEGIO/Laboratorio/Ejercicios de Java/src/com/company/RestauranteGUI/addPedido.png");
         JButton addPedido = new JButton();
                 addPedido.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.DARK_GRAY));
                 addPedido.setIcon(addPedidoIMG);

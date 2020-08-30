@@ -1,16 +1,22 @@
+
+package com.company.RestauranteGUI;
+
+import com.company.AccesoBaseDeDatos;
+import com.company.Restaurante.Pedido;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GuiRestaurante{
-    AccesoBaseDeDatos        BasePedido          = new AccesoBaseDeDatos("laboratorio", "pedido");
     AccesoBaseDeDatos        BasePlato           = new AccesoBaseDeDatos("laboratorio", "plato");
-    AccesoBaseDeDatos        BaseDetallePedido   = new AccesoBaseDeDatos("laboratorio", "detallePedido");
     HashMap<String, Integer> menu                = new HashMap<>();
     ArrayList<Pedido>        listaPedidos        = new ArrayList<>();
     JPanel                   contenedor          = new JPanel(new BorderLayout());
@@ -21,7 +27,6 @@ public class GuiRestaurante{
     public static void main(String[] args) {
         GuiRestaurante restaurante = new GuiRestaurante();
 
-        restaurante.BasePedido.conectar("root","");
         restaurante.BasePlato.conectar("root","");
 
         restaurante.ventana.setLayout(new BorderLayout());
@@ -49,11 +54,7 @@ public class GuiRestaurante{
 
         /*-------------------------------------*/
 
-        restaurante.menu.put("Milanesa con puré de papas", 0);
-        restaurante.menu.put("Ravioles rellenos con carne", 0);
-        restaurante.menu.put("Pizza a la Piedra", 0);
-        restaurante.menu.put("Polenta con salsa Fileto", 0);
-        restaurante.menu.put("Arroz primavera", 0);
+        restaurante.cargarMenu();
 
         /*-------------------------------------*/
 
@@ -156,68 +157,22 @@ public class GuiRestaurante{
     public void alertaDefinirCantMesas(){
         JOptionPane.showMessageDialog(contenedor,"Antes debe definir la cantidad de mesas","Alert",JOptionPane.WARNING_MESSAGE);
     }
-/*
-    public int getIdPedido(Pedido pedido){
-        int idPedido;
-        ResultSet resultSet = null;
-        String consulta = "SELECT idPedido FROM " + BasePedido.getNombreTabla() + " WHERE idPedido = MAX(idPedido) AND mesa = '" + pedido.getNumeroDeMesa() + "';";
-        try{
-            PreparedStatement sentenciaSQL = BaseDetallePedido.getConexion().prepareStatement(consulta);
-            int resultado = sentenciaSQL.executeUpdate();
-            if(resultado > 0){
-                JOptionPane.showMessageDialog(contenedor,"El pedido se a registrado exitosamente");
-            }
-            else{
-                JOptionPane.showMessageDialog(contenedor,"Hubo un error al almecenar el pedido");
-                sentenciaSQL.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
-       return idPedido;
+    //Base de adtos
+
+    public void cargarMenu(){
+        try {
+            Statement st = BasePlato.getConexion().createStatement();
+            ResultSet resultado = st.executeQuery("SELECT nombrePlato FROM " + BasePlato.getNombreTabla());
+            while (resultado.next()) {
+                String nombre = resultado.getString("nombrePlato");
+                menu.put(nombre, 0);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
-    public int getIdPlato(String plato){
-        int idPlato;
-        return idPlato;
-    }*/
-
-    public void actualizarListaPedido(Pedido nuevoPedido){
-        String consulta = "INSERT INTO " + BasePedido.getNombreTabla() + "(idPedido,mesa,estado) VALUES (null,'" + nuevoPedido.getNumeroDeMesa() + "', '" + nuevoPedido.getEstado() + "');";
-        try{
-            PreparedStatement sentenciaSQL = BasePedido.getConexion().prepareStatement(consulta);
-            if(sentenciaSQL.executeUpdate() <= 0){
-                JOptionPane.showMessageDialog(contenedor,"Hubo un error al almecenar el pedido");
-                sentenciaSQL.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-/*
-        ResultSet resultSet = null;
-        int idPedido = getIdPedido(nuevoPedido);
-        for (HashMap.Entry<String, Integer> plato_aux : nuevoPedido.getPlatos().entrySet()) {
-            String consulta2 = "INSERT INTO " + BaseDetallePedido.getNombreTabla() + "(idPedido, idPlato, cantidad) VALUES (" + idPedido + ", "
-                                                                                                                              + getIdPlato(plato_aux.getKey()) + ", "
-                                                                                                                              + plato_aux.getValue()
-                                                                                                                              + ");";
-            System.out.println(consulta2);
-            try{
-                PreparedStatement sentenciaSQL = BaseDetallePedido.getConexion().prepareStatement(consulta2);
-                int resultado = sentenciaSQL.executeUpdate();
-                if(resultado > 0){
-                    JOptionPane.showMessageDialog(contenedor,"El pedido se a registrado exitosamente");
-                }
-                else{
-                    JOptionPane.showMessageDialog(contenedor,"Hubo un error al almecenar el pedido");
-                    sentenciaSQL.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }*/
-    }
 
     public void actualizarMenu(HashMap<String, Integer> pedido, String plato, String accion){
         if(plato != null){
@@ -238,6 +193,8 @@ public class GuiRestaurante{
                 notificacion = "El plato '" + plato + "' se ha eliminado exitosamente";
                 menu.remove(plato);
             }
+            System.out.println(consulta);
+
             try {
                 PreparedStatement sentenciaSQL = BasePlato.getConexion().prepareStatement(consulta);
                 int resultado = sentenciaSQL.executeUpdate();
@@ -250,7 +207,6 @@ public class GuiRestaurante{
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
         else{
             for (HashMap.Entry<String, Integer> entryPedido : pedido.entrySet()) {
@@ -265,3 +221,4 @@ public class GuiRestaurante{
 
 
 }
+

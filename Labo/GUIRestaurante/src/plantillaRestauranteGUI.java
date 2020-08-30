@@ -1,3 +1,7 @@
+package com.company.RestauranteGUI;
+
+import com.company.Restaurante.Pedido;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
