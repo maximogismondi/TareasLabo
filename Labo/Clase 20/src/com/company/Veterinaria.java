@@ -1,10 +1,12 @@
 package com.company;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Veterinaria {
-    
+
     HashSet<Mascota> listaDeMascota;
     Integer ano_actual = 2020;
+    ArrayList<String> listaNombre = new ArrayList<>();
 
     public HashSet<String> razasDePerrosIncumplidoras(){
         HashSet<String> lista_aux = new HashSet<>();
@@ -16,7 +18,6 @@ public class Veterinaria {
         }
         return lista_aux;
     }
-
     public String tipoMascotaConMayorCumplimiento(){
         int visitaPerros = 0, visitasGatos = 0, visitasTortugas = 0;
         int max_visitas  = -1;
@@ -49,5 +50,16 @@ public class Veterinaria {
             }
         }
         return tipo;
+    }
+    public String ingresarDueno(){
+        String nombreDueno = "";
+        try{
+            System.out.print("ingrese nombre de dueño: ");
+            nombreDueno = listaNombre.get(listaNombre.indexOf(input.nextLine()));
+        }
+        catch (IndexOutOfBoundsException ex){
+            System.out.println("Ocurrio un error:  " + ex.getMessage());
+        }
+        return nombreDueno;
     }
 }
